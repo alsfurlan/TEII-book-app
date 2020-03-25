@@ -14,6 +14,14 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+  },
+  {
+    path: 'livros',
+    loadChildren: () => import('./livros/livros.module').then( m => m.LivrosPageModule)
+  },
+  {
+    path: 'autores',
+    loadChildren: () => import('./autores/autores.module').then( m => m.AutoresPageModule)
   }
 ];
 
