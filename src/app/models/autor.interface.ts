@@ -1,4 +1,4 @@
 interface Autor {
-    id: number;
+    id?: number;
     nome: string;
 }

@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: AutoresPage
+  },
+  {
+    path: 'cadastro',
+    loadChildren: () => import('./cadastro/cadastro.module').then( m => m.CadastroPageModule)
   }
 ];
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { $ } from 'protractor';
+import { AutorService } from '../services/autor.service';
 
 @Component({
   selector: 'app-autores',
@@ -12,15 +12,19 @@ export class AutoresPage implements OnInit {
   autores: Autor[];
 
   constructor(
-    private alertController: AlertController
-  ) {
-    this.autores = [
-      { id: 1, nome: 'David Flanagan' },
-      { id: 2, nome: 'Douglas Cockford' },
-    ];
-  }
+    private alertController: AlertController,
+    private autorService: AutorService
+  ) { }
 
   ngOnInit() {
+  }
+
+  ionViewWillEnter() {
+    this.listar();
+  }
+
+  listar() {
+    this.autores = this.autorService.getAutores();
   }
 
   async confirmarExclusao(autor: Autor) {
@@ -40,7 +44,8 @@ export class AutoresPage implements OnInit {
   }
 
   excluir(autor: Autor) {
-    this.autores = this.autores.filter(a => a.id !== autor.id);
+    this.autorService.excluir(autor);
+    this.listar();
   }
 
 }

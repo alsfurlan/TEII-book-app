@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Cadastro de Autores</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating">Nome *:</ion-label>
+    <ion-input type="text" [(ngModel)]="autor.nome"></ion-input>
+  </ion-item>
+  <ion-fab vertical="bottom" horizontal="end" >
+    <ion-fab-button (click)="salvar()" [disabled]="!autor.nome">
+      <ion-icon name="checkmark-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
