@@ -1,0 +1,12 @@
+{
+    "autores":  [
+        { 
+            "id": 1, 
+            "nome": "David Flanagan" 
+        },
+        { 
+            "id": 2, 
+            "nome": "Douglas Cockford" 
+        }
+    ]
+}

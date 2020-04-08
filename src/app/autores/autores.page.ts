@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
+import { AlertController, LoadingController } from '@ionic/angular';
 import { AutorService } from '../services/autor.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-autores',
@@ -13,7 +14,8 @@ export class AutoresPage implements OnInit {
 
   constructor(
     private alertController: AlertController,
-    private autorService: AutorService
+    private autorService: AutorService,
+    private loadingController: LoadingController 
   ) { }
 
   ngOnInit() {
@@ -23,8 +25,16 @@ export class AutoresPage implements OnInit {
     this.listar();
   }
 
-  listar() {
-    this.autores = this.autorService.getAutores();
+  async listar() {
+    const loading = await this.loadingController.create({
+      message: 'Carregando'
+    });
+    loading.present();
+    // this.autores = this.autorService.getAutores();
+    this.autorService.getAutores().subscribe((data) => {
+      this.autores = data;
+      loading.dismiss();
+    });
   }
 
   async confirmarExclusao(autor: Autor) {

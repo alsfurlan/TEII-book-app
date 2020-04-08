@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,13 @@ export class AutorService {
     { id: 2, nome: 'Douglas Cockford' },
   ];
 
-  constructor() { }
+  constructor(
+    private httpClient : HttpClient
+  ) { }
 
   getAutores() {
-    return this.autores;
+    return this.httpClient.get<Autor[]>('http://localhost:3000/autores');
+    // return this.autores;
   }
 
   adicionar(autor: Autor) {
