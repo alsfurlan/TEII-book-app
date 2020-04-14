@@ -17,13 +17,10 @@ export class AutorService {
 
   getAutores() {
     return this.httpClient.get<Autor[]>('http://localhost:3000/autores');
-    // return this.autores;
   }
 
   adicionar(autor: Autor) {
-    // this.autores.push(autor);
-    autor.id = parseInt((Math.random() * 100).toFixed(0));
-    this.autores = [...this.autores, autor];
+    return this.httpClient.post<Autor>('http://localhost:3000/autores', autor);
   }
 
   atualizar(autor: Autor) {
@@ -45,7 +42,7 @@ export class AutorService {
   }
 
   excluir(autor: Autor) {
-    this.autores = this.autores.filter(a => a.id !== autor.id);
+    return this.httpClient.delete(`http://localhost:3000/autores/${autor.id}`);
   }
 
   getAutor(id: number) {
@@ -58,7 +55,7 @@ export class AutorService {
     if (autor && autor.id) {
       this.atualizar(autor);
     } else {
-      this.adicionar(autor);
+      return this.adicionar(autor);
     }
   }
 }

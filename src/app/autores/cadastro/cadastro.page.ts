@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AutorService } from 'src/app/services/autor.service';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,7 +15,8 @@ export class CadastroPage implements OnInit {
   constructor(
     private autorService : AutorService,
     private activatedRoute : ActivatedRoute,
-    private navController : NavController
+    private navController : NavController,
+    private loadingController : LoadingController
   ) {
     const id = parseInt(this.activatedRoute.snapshot.params['id']);       
     if(id) {
@@ -30,9 +31,16 @@ export class CadastroPage implements OnInit {
   }
 
 
-  salvar() {
-    this.autorService.salvar(this.autor);
-    this.navController.navigateForward(['/autores']);
+  async salvar() {
+    let loading = await this.loadingController.create({message: 'Salvando'});
+    loading.present();
+
+    this.autorService
+      .salvar(this.autor)
+      .subscribe(() => {
+        loading.dismiss();
+        this.navController.navigateForward(['/autores']);
+      });
   }
 
 }

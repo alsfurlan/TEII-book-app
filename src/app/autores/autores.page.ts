@@ -54,8 +54,7 @@ export class AutoresPage implements OnInit {
   }
 
   excluir(autor: Autor) {
-    this.autorService.excluir(autor);
-    this.listar();
+    this.autorService.excluir(autor).subscribe(() => this.listar());
   }
 
 }
