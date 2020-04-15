@@ -17,17 +17,21 @@ export class CadastroPage implements OnInit {
     private activatedRoute : ActivatedRoute,
     private navController : NavController,
     private loadingController : LoadingController
-  ) {
-    const id = parseInt(this.activatedRoute.snapshot.params['id']);       
-    if(id) {
-      this.autor = this.autorService.getAutor(id);
-    } else {    
-      this.autor = { nome: '' };
-    }
+  ) { 
+    this.autor = { nome: '' };
   }
 
-
-  ngOnInit() {
+  async ngOnInit() {
+    const id = parseInt(this.activatedRoute.snapshot.params['id']);       
+    if(id) {
+      // Carregar as informações
+      const loading = await this.loadingController.create({message: 'Carregando'});
+      loading.present();
+      this.autorService.getAutor(id).subscribe((autor) => {
+        this.autor = autor;
+        loading.dismiss();
+      });
+    } 
   }
 
 
