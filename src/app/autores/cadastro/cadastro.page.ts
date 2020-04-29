@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AutorService } from 'src/app/services/autor.service';
 import { NavController, LoadingController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { Autor } from 'src/app/models/autor.interface';
 
 @Component({
   selector: 'app-cadastro',

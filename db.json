@@ -8,5 +8,43 @@
             "id": 2, 
             "nome": "Douglas Cockford" 
         }
+    ],
+    "livros": [
+        {
+            "id": 1,
+            "titulo": "JavaScript: The Good Parts",
+            "isbn": "9780596517748",
+            "paginas": 176,
+            "preco": 120.5,
+            "imagem": "https://m.media-amazon.com/images/I/511j6cza5bL._SX260_.jpg",
+            "editora": "O'Reilly",
+            "lancamento": "2020-10-20",
+            "autores": [
+                { 
+                    "id": 2, 
+                    "nome": "Douglas Cockford" 
+                }        
+            ]
+        },
+        {
+            "id": 2,
+            "titulo": "JavaScript: The Definitive Guide",
+            "isbn": "0596805527",
+            "paginas": 1078,
+            "preco": 306.31,
+            "imagem": "https://images-na.ssl-images-amazon.com/images/I/71WzJARrAwL.jpg",
+            "editora": "O'Reilly",
+            "lancamento": "2020-10-20",
+            "autores": [
+                { 
+                    "id": 1, 
+                    "nome": "David Flanagan" 
+                },
+                { 
+                    "id": 2, 
+                    "nome": "Douglas Cockford" 
+                }     
+            ]
+        }        
     ]
 }

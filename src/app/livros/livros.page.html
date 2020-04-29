@@ -1,9 +1,39 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>livros</ion-title>
+    <ion-title>Livros</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-list>
+    <ion-item *ngFor="let livro of livros">
+      <ion-thumbnail slot="start">
+        <ion-img [src]="livro.imagem"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{livro.titulo}}</h2>
+        <h3>Autor(es):</h3>
+        <ul class="autores">
+          <li *ngFor="let autor of livro.autores">
+            <ion-text color="medium">{{autor.nome}}</ion-text>
+          </li>
+        </ul>
+        <h3>
+          ISBN: <ion-text color="medium">{{livro.isbn}}</ion-text>
+        </h3>
+        <h3>
+          Páginas: <ion-text color="medium">{{livro.paginas}}</ion-text>
+        </h3>
+        <h3>
+          Editora: <ion-text color="medium">{{livro.editora}}</ion-text>
+        </h3>
+        <h3>
+          Lançamento: <ion-text color="medium">{{livro.lancamento | date:'dd/MM/yyyy'}}</ion-text>
+        </h3>
+      </ion-label>
+      <ion-note color="danger" slot="end">
+        <h3>{{livro.preco | currency:'BRL'}}</h3>
+      </ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>

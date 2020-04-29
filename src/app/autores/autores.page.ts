@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController } from '@ionic/angular';
 import { AutorService } from '../services/autor.service';
-import { HttpClient } from '@angular/common/http';
+import { Autor } from '../models/autor.interface';
 
 @Component({
   selector: 'app-autores',
