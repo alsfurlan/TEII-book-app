@@ -53,8 +53,14 @@ export class AutoresPage implements OnInit {
     alerta.present();
   }
 
-  excluir(autor: Autor) {
-    this.autorService.excluir(autor).subscribe(() => this.listar());
+  private async excluir(autor: Autor) {
+    const busyLoader = await this.loadingController.create({ message: 'Excluíndo...' });
+    busyLoader.present();
+    
+    this.autorService.excluir(autor).subscribe(() => {
+      this.listar()
+      busyLoader.dismiss();
+    });
   }
 
 }
