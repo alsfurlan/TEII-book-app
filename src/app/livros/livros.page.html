@@ -6,34 +6,46 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let livro of livros">
-      <ion-thumbnail slot="start">
-        <ion-img [src]="livro.imagem"></ion-img>
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{livro.titulo}}</h2>
-        <h3>Autor(es):</h3>
-        <ul class="autores">
-          <li *ngFor="let autor of livro.autores">
-            <ion-text color="medium">{{autor.nome}}</ion-text>
-          </li>
-        </ul>
-        <h3>
-          ISBN: <ion-text color="medium">{{livro.isbn}}</ion-text>
-        </h3>
-        <h3>
-          Páginas: <ion-text color="medium">{{livro.paginas}}</ion-text>
-        </h3>
-        <h3>
-          Editora: <ion-text color="medium">{{livro.editora}}</ion-text>
-        </h3>
-        <h3>
-          Lançamento: <ion-text color="medium">{{livro.lancamento | date:'dd/MM/yyyy'}}</ion-text>
-        </h3>
-      </ion-label>
-      <ion-note color="danger" slot="end">
-        <h3>{{livro.preco | currency:'BRL'}}</h3>
-      </ion-note>
-    </ion-item>
+    <ion-item-sliding *ngFor="let livro of livros">
+      <ion-item>
+        <ion-thumbnail slot="start">
+          <ion-img [src]="livro.imagem"></ion-img>
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{livro.titulo}}</h2>
+          <h3>Autor(es):</h3>
+          <ul class="autores">
+            <li *ngFor="let autor of livro.autores">
+              <ion-text color="medium">{{autor.nome}}</ion-text>
+            </li>
+          </ul>
+          <h3>
+            ISBN: <ion-text color="medium">{{livro.isbn}}</ion-text>
+          </h3>
+          <h3>
+            Páginas: <ion-text color="medium">{{livro.paginas}}</ion-text>
+          </h3>
+          <h3>
+            Editora: <ion-text color="medium">{{livro.editora}}</ion-text>
+          </h3>
+          <h3>
+            Lançamento: <ion-text color="medium">{{livro.lancamento | date:'dd/MM/yyyy'}}</ion-text>
+          </h3>
+        </ion-label>
+        <ion-note color="danger" slot="end">
+          <h3>{{livro.preco | currency:'BRL'}}</h3>
+        </ion-note>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option>
+          <ion-icon name="create" slot="icon-only"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="confirmacaoExclusao(livro)">
+          <ion-icon name="trash-sharp" slot="icon-only" ></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
