@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Cadastro de Livros</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating">Título: </ion-label>
+    <ion-input type="text" [(ngModel)]="livro.titulo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Autores:</ion-label>
+    <ion-select [(ngModel)]="livro.autores" multiple="true" placeholder="Selecione os autores">
+      <ion-select-option *ngFor="let autor of autores" [value]="autor">
+        {{autor.nome}}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">ISBN: </ion-label>
+    <ion-input type="text" [(ngModel)]="livro.isbn"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">N°. Páginas: </ion-label>
+    <ion-input type="number" [(ngModel)]="livro.paginas"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Preço: </ion-label>
+    <ion-input type="number" [(ngModel)]="livro.preco"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Imagem (URL): </ion-label>
+    <ion-input type="url" [(ngModel)]="livro.imagem"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Editora: </ion-label>
+    <ion-input type="text" [(ngModel)]="livro.editora"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked">Data de Lançamento: </ion-label>
+    <ion-input type="date" [(ngModel)]="livro.lancamento"></ion-input>
+  </ion-item>
+
+  <!-- <ion-item>
+    {{ livro | json}}
+  </ion-item> -->
+
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="salvar(livro)">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+</ion-content>

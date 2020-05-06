@@ -9,5 +9,5 @@ export interface Livro {
     imagem: string;
     autores: Autor[];
     editora: string;
-    lancamento: Date;
+    lancamento?: Date;
 }

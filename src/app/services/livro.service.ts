@@ -20,4 +20,9 @@ export class LivroService {
   excluir(livro: Livro) {
     return this.httpClient.delete(`${this.URI}/${livro.id}`);
   }
+
+  adicionar(livro: Livro) {
+    return this.httpClient.post(this.URI, livro);
+  }
+  
 }

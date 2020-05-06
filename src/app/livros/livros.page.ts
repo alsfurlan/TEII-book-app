@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LivroService } from '../services/livro.service';
 import { Livro } from '../models/livro.interface';
 import { LoadingController, AlertController } from '@ionic/angular';
+import { BusyLoaderService } from '../services/busy-loader.service';
 
 @Component({
   selector: 'app-livros',
@@ -14,7 +15,7 @@ export class LivrosPage implements OnInit {
 
   constructor(
     private livroService: LivroService,
-    private loadingController: LoadingController,
+    private busyLoader: BusyLoaderService,
     private alertController: AlertController
   ) { }
 
@@ -25,7 +26,7 @@ export class LivrosPage implements OnInit {
   }
 
   async listar() {
-    const busyLoader = await this.iniciarCarregamento('Carregando livros ...');
+    const busyLoader = await this.busyLoader.create('Carregando livros ...');
     
     this.livros = await this.livroService.getLivros().toPromise();
     busyLoader.dismiss();
@@ -49,7 +50,7 @@ export class LivrosPage implements OnInit {
   }
 
   private async excluir(livro: Livro) {
-    const busyLoader = await this.iniciarCarregamento('Excluíndo ...');
+    const busyLoader = await this.busyLoader.create('Excluíndo ...');
     
     this.livroService.excluir(livro).subscribe(() => {
       this.listar()
@@ -57,9 +58,4 @@ export class LivrosPage implements OnInit {
     });
   }
 
-  private async iniciarCarregamento(mensagem: string) {
-    const busyLoader = await this.loadingController.create({ message: mensagem });
-    busyLoader.present();
-    return busyLoader;
-  }
 }
