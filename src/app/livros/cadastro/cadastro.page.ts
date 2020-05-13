@@ -5,6 +5,7 @@ import { NavController } from '@ionic/angular';
 import { BusyLoaderService } from 'src/app/services/busy-loader.service';
 import { Livro } from 'src/app/models/livro.interface';
 import { LivroService } from 'src/app/services/livro.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-cadastro',
@@ -20,13 +21,14 @@ export class CadastroPage implements OnInit {
     private autorService: AutorService,
     private livroService: LivroService,
     private busyLoader: BusyLoaderService,
-    private navController: NavController
+    private navController: NavController,
+    private activatedRoute: ActivatedRoute
   ) { 
     this.livro = {
       titulo: '',
       autores: [],
       editora: '',
-      imagem: 'https://',
+      imagem: '',
       isbn: '',
       paginas: 0,
       preco: 0.00,
@@ -43,20 +45,31 @@ export class CadastroPage implements OnInit {
     
     this.autorService.getAutores().subscribe((autores) => {
       this.autores = autores;
+      this.carregarLivro();
       busyLoader.dismiss();
     });
   }
+
+  carregarLivro() {
+    const id = this.activatedRoute.snapshot.params['id'];
+    if (id) {
+      this.livroService.getLivro(id).subscribe(livro => this.livro = livro);
+    }
+  }
+
+  compareWith(autor1: Autor, autor2: Autor) {
+    return autor1 && autor2 ? autor1.id === autor2.id : autor1 === autor2;
+  };
 
   async salvar(livro: Livro) {
     const loading = await this.busyLoader.create('Salvando livro...');
 
     this.livroService
-      .adicionar(livro)
+      .salvar(livro)
       .subscribe(() => {
         loading.dismiss();
         this.navController.navigateForward(['/livros']);
-      })
-
+      });
   }
 
 }

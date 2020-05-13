@@ -1,6 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>Cadastro de Livros</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +16,7 @@
 
   <ion-item>
     <ion-label>Autores:</ion-label>
-    <ion-select [(ngModel)]="livro.autores" multiple="true" placeholder="Selecione os autores">
+    <ion-select [(ngModel)]="livro.autores" multiple="true" placeholder="Selecione os autores" [compareWith]="compareWith">
       <ion-select-option *ngFor="let autor of autores" [value]="autor">
         {{autor.nome}}
       </ion-select-option>

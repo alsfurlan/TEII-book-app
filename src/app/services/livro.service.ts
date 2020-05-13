@@ -6,7 +6,7 @@ import { Livro } from '../models/livro.interface';
   providedIn: 'root'
 })
 export class LivroService {
-  
+
   private URI = 'http://localhost:3000/livros';
   
   constructor(
@@ -21,8 +21,24 @@ export class LivroService {
     return this.httpClient.delete(`${this.URI}/${livro.id}`);
   }
 
-  adicionar(livro: Livro) {
+  private adicionar(livro: Livro) {
     return this.httpClient.post(this.URI, livro);
+  }
+
+  private atualizar(livro: Livro) {
+    return this.httpClient.put(`${this.URI}/${livro.id}`, livro);
+  }
+
+  salvar(livro: Livro) {
+    if(livro.id) {
+      return this.atualizar(livro);
+    } else {
+      return this.adicionar(livro);
+    }
+  }
+
+  getLivro(id: number) {
+    return this.httpClient.get<Livro>(`${this.URI}/${id}`);
   }
   
 }
