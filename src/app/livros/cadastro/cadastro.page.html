@@ -9,59 +9,119 @@
 
 <ion-content>
 
-  <ion-item>
-    <ion-label position="floating">Título: </ion-label>
-    <ion-input type="text" [(ngModel)]="livro.titulo"></ion-input>
-  </ion-item>
+  <form #livroForm="ngForm" novalidate>
 
-  <ion-item>
-    <ion-label>Autores:</ion-label>
-    <ion-select [(ngModel)]="livro.autores" multiple="true" placeholder="Selecione os autores" [compareWith]="compareWith">
-      <ion-select-option *ngFor="let autor of autores" [value]="autor">
-        {{autor.nome}}
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Título: </ion-label>
+      <ion-input #titulo="ngModel" type="text" [(ngModel)]="livro.titulo" name="titulo" required minlength="3"></ion-input>
+      <ion-text color="danger" *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
+        <small>
+          <span *ngIf="titulo.errors.required">
+            O título é obrigatório
+          </span>
+          <span *ngIf="titulo.errors.minlength">
+            O título deve ter no mínimo 3 caracteres
+          </span>
+        </small>
+      </ion-text>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">ISBN: </ion-label>
-    <ion-input type="text" [(ngModel)]="livro.isbn"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label>Autores:</ion-label>
+      <ion-select [(ngModel)]="livro.autores" multiple="true" placeholder="Selecione os autores"
+        [compareWith]="compareWith" name="autor" >
+        <ion-select-option *ngFor="let autor of autores" [value]="autor">
+          {{autor.nome}}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">N°. Páginas: </ion-label>
-    <ion-input type="number" [(ngModel)]="livro.paginas"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">ISBN: </ion-label>
+      <ion-input #isbn="ngModel" type="text" [(ngModel)]="livro.isbn" name="isbn" pattern="[0-9]{10}" required></ion-input>
+      <ion-text color="danger" *ngIf="isbn.invalid && (isbn.dirty || isbn.touched)">
+        <small>
+          <span *ngIf="isbn.errors.required">
+            O ISBN é obrigatório
+          </span>
+          <span *ngIf="isbn.errors.pattern">
+            O ISBN contém 10 dígitos númericos
+          </span>
+        </small>
+      </ion-text>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Preço: </ion-label>
-    <ion-input type="number" [(ngModel)]="livro.preco"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">N°. Páginas: </ion-label>
+      <ion-input #paginas="ngModel" type="number" [(ngModel)]="livro.paginas" name="paginas" required pattern="[0-9]+"></ion-input>
+      <ion-text color="danger" *ngIf="paginas.invalid && (paginas.dirty || paginas.touched)">
+        <small>
+          <span *ngIf="paginas.errors.required">
+            O número de paginas é obrigatório
+          </span>
+          <span *ngIf="paginas.errors.pattern">
+            O número de paginas deve ser superior a zero
+          </span>
+        </small>
+      </ion-text>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Imagem (URL): </ion-label>
-    <ion-input type="url" [(ngModel)]="livro.imagem"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Preço: </ion-label>
+      <ion-input #preco="ngModel" type="number" [(ngModel)]="livro.preco" name="preco" required min="0" pattern="[0-9]+\.?[0-9]*"></ion-input>
+      <ion-text color="danger" *ngIf="preco.invalid && (preco.dirty || preco.touched)">
+        <small>
+          <span *ngIf="preco.errors.required">
+            O preço é obrigatório
+          </span>
+          <span *ngIf="preco.errors.pattern">
+            O preço deve ser superior a zero
+          </span>
+        </small>
+      </ion-text>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="floating">Editora: </ion-label>
-    <ion-input type="text" [(ngModel)]="livro.editora"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Imagem (URL): </ion-label>
+      <ion-input #imagem="ngModel" type="url" [(ngModel)]="livro.imagem" name="imagem" required></ion-input>
+      <ion-text color="danger" *ngIf="imagem.invalid && (imagem.dirty || imagem.touched)">
+        <small>
+          <span *ngIf="imagem.errors.required">
+            A imagem é obrigatória.
+          </span>
+        </small>
+      </ion-text>
+    </ion-item>
 
-  <ion-item>
-    <ion-label position="stacked">Data de Lançamento: </ion-label>
-    <ion-input type="date" [(ngModel)]="livro.lancamento"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label position="floating">Editora: </ion-label>
+      <ion-input #editora="ngModel" type="text" [(ngModel)]="livro.editora" name="editora" required minlength="3"></ion-input>
+      <ion-text color="danger" *ngIf="editora.invalid && (editora.dirty || editora.touched)">
+        <small>
+          <span *ngIf="editora.errors.required">
+            A editora é obrigatória
+          </span>
+          <span *ngIf="editora.errors.minlength">
+            A editora deve ter no mínimo 3 caracteres
+          </span>
+        </small>
+      </ion-text>
+    </ion-item>
 
-  <!-- <ion-item>
+    <ion-item>
+      <ion-label position="stacked">Data de Lançamento: </ion-label>
+      <ion-input type="date" [(ngModel)]="livro.lancamento" name="lancamento"></ion-input>
+    </ion-item>
+
+    <!-- <ion-item>
     {{ livro | json}}
   </ion-item> -->
 
-  <ion-fab vertical="bottom" horizontal="end">
-    <ion-fab-button (click)="salvar(livro)">
-      <ion-icon name="checkmark"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button (click)="salvar(livro)" [disabled]="livroForm.invalid">
+        <ion-icon name="checkmark"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 
-
+  </form>
 </ion-content>
