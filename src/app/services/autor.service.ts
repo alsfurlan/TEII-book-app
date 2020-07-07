@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Autor } from '../models/autor.interface';
+import { BASE_API } from './base-api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutorService {
 
-  private URI = 'http://localhost:3000/autores';
+  private URI = BASE_API + 'autores';
 
   constructor(
     private httpClient : HttpClient

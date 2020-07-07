@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Livro } from '../models/livro.interface';
+import { BASE_API } from './base-api';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LivroService {
 
-  private URI = 'http://localhost:3000/livros';
+  private URI = BASE_API + 'livros';
   
   constructor(
     private httpClient:HttpClient
